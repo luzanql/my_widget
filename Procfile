@@ -1,1 +1,1 @@
-web: gunicorn widget.wsgi --log-file -
+web: gunicorn mywidget.wsgi
