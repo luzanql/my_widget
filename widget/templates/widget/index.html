@@ -12,7 +12,6 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-        <link rel="stylesheet" href="../../../css/styles.css">
 
         <!-- JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -20,7 +19,148 @@
         <script src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js"></script>
     </head>
     <body>
-        <label id='app-widget-label'>Text My Widget</label><br>
+        <label id='app-widget-label'>Text Widget A</label><br>
         <input id='app-widget-input' class="input" type="text" placeholder="Text component">
+
+        <script>
+
+            /**
+             * function which contacts widget's server in order to decrypt
+             * a string provided by the SDK. The returned value is simply
+             * whatever the decrypted sting is...
+             *
+             * @param {String} eNonce
+             *    The encrypted string provided by the SDK
+             *
+             * @return {Promise<Object>}
+             *    A promise which is fullfilled with the decrypted value
+             *    of the the eNonce parameter
+             */
+            function getNonce(eNonce) {
+                return $.ajax({
+                    url: '/nonce',
+                    type:   'POST',
+                    dataType: 'json',
+                    data: {
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                        'id' : eNonce,
+                    }
+                });
+            }
+
+            /**
+             * function to populate the HTML elements of this widget. This
+             * function was designed to consume the "components" object 
+             * returned by the SDK's "getComponents()" function. 
+             *
+             * @param {Map} components
+             *    A map object filled with all the components assigned
+             *    to this widget instance.
+             *
+             * @return {String}
+             *    The component_name
+             */
+            function setValue(components) {
+
+                // grab the iterator and use it to retrieve the first component 
+                // (in this case, we're just expecting one component)
+                let iterator = components.values();
+                let component = iterator.next().value;
+
+                // use the component to populate the label, name, and value of the 
+                // corresponding HTML element
+                $('#app-widget-label').text(component.label);
+                $('#app-widget-input').val(component.value);
+                $('#app-widget-input').attr('name', component.name);
+
+                // return component name for use in our modal
+                return component.name;
+            }
+
+            /**
+             * function to get the values of the components this widget is 
+             * servicing. This function was designed to provide values
+             * for the SDK, therefore, it's returning them as an array
+             * of objects with a "name", and "value" attribute.
+             *
+             * @return {Array<Object>}
+             *    A single entry array with an object containing
+             *    the name and the value of the component this widget
+             *    is servicing
+             */
+            function getValue() {
+
+                // in this case, this widget is designed to only support 
+                // one component at a time, therefore this function will
+                // return an array containint just one object
+                return [
+                    {
+                        name:   $('#app-widget-input').attr('name'),
+                        value:  $('#app-widget-input').val()
+                    }
+                ];
+            }
+
+            /**
+             * function to prepare a "hello world" modal window displaying
+             * the name of the underlying component this widget is servicing
+             *
+             * @param {String} componentName
+             *    The component name we wish to use in our modal
+             *
+             * @return {Object}
+             *    An object specially built to be used with the SDK's modal 
+             *    function
+             */
+            function prepareModal(componentName) {
+
+                // define title
+                let titleContent = 'HELLO WORLD MODAL!'
+
+                // define html content
+                let htmlContent =
+                    '<div>I am servicing this component: <b>' + componentName + '</b></div>' +
+
+                    // basic cross script attack attempt
+                    "<div> <script> Alert('xss!'); </sc" +
+                    "ript> </div>";
+
+                // randomly choose small, medium, or large
+                var randomIndex = Math.floor(Math.random() * 3); // returns a random integer from 0 to 2
+                let sizes = ['small', 'medium', 'large'];
+
+                // return object
+                return {
+                    html:   htmlContent,
+                    size:   sizes[randomIndex],
+                    title:  titleContent
+                };
+            }
+
+            console.log("Let's initialize the canvas");
+            // interaction with the sdk
+            // 1. initialize SDK
+            window.CanvasSDK.initialize({
+
+                'nonce': function(e) {
+                    return getNonce(e);
+                },
+                'component-values': function() {
+                    return getValue();
+                }
+            })
+            // 2. get the components (and their persisted values) associated with this widget
+            .then(function() {
+                return window.CanvasSDK.getComponents();
+            })
+            // 3. use the response from the previous call to get the components in order to populate the UI
+            .then(function(response){
+
+                // Internally set value (and get component name for use in our modal)
+                let componentName = setValue(response.components);
+
+            });
+
+        </script>
     </body>
 </html>
