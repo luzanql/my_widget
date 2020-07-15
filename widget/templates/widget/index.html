@@ -19,11 +19,39 @@
         <script src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js"></script>
         <style>
             body{
-              font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+                font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
             }
-            label{
-                font-weight: bolder;
+            label#app-widget-label {
+                display: inline-block;
+                font-family: Roboto,sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: .5rem
             }
+
+            select#app-widget-input {
+                -ms-flex-align: center;
+                align-items: center;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                box-shadow: none;
+                display: -ms-inline-flexbox;
+                display: inline-flex;
+                color: #424242;
+                cursor: pointer;
+                display: block;
+                font-size: 1rem;
+                height: 2.5em;
+                -ms-flex-pack: start;
+                justify-content: flex-start;
+                line-height: 1.5;
+                max-width: 100%;
+                outline: 0;
+                padding: 7px 20px 7px 11px;
+                position: relative;
+                vertical-align: top;
+         }
         </style>
     </head>
     <body>
@@ -163,13 +191,14 @@
             })
             // 2. get the components (and their persisted values) associated with this widget
             .then(function() {
-                return window.CanvasSDK.getComponents();
+                console("Hanshake done - Next step is Get Components Values")
+                //return window.CanvasSDK.getComponents();
             })
             // 3. use the response from the previous call to get the components in order to populate the UI
             .then(function(response){
 
                 // Internally set value (and get component name for use in our modal)
-                let componentName = setValue(response.components);
+               // let componentName = setValue(response.components);
 
             });
 
