@@ -16,7 +16,7 @@
         <!-- JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js"></script>
+
         <style>
             body{
                 font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
@@ -62,7 +62,8 @@
             <option value="co">https://my-awesome-site.co</option>
             <option value="it">https://my-awesome-site.com</option>
         </select>
-        <script>
+        <script type="module" src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js">
+            import { CanvasSDK} from './CanvasSDK';
 
             /**
              * function which contacts widget's server in order to decrypt
@@ -180,7 +181,7 @@
             console.log("Let's initialize the canvas");
             // interaction with the sdk
             // 1. initialize SDK
-            window.CanvasSDK.initialize({
+            CanvasSDK.initialize({
 
                 'nonce': function(e) {
                     return getNonce(e);
