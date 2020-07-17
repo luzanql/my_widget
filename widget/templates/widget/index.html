@@ -16,11 +16,14 @@
         <!-- JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+        <script src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js"></script>
         <style>
             body{
+              font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
                 font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
             }
+q
+
             label#app-widget-label {
                 display: inline-block;
                 font-family: Roboto,sans-serif;
@@ -55,18 +58,16 @@
         </style>
     </head>
     <body>
-        <label id='app-widget-label'>URL Manager</label><br>
+        <label id='app-widget-label'>Url Manager</label><br>
         <select id='app-widget-input'>
             <option>Select a value</option>
             <option value="fr">https://scotch.com/site</option>
             <option value="co">https://scotch.com/tyc</option>
             <option value="it">https://scotch.com/faq</option>
         </select>
-        <script type="module" src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js">
-            import { CanvasSDK} from './CanvasSDK';
-            const CanvasSDK = new CanvasSDK();
-        </script>
+
         <script>
+
             /**
              * function which contacts widget's server in order to decrypt
              * a string provided by the SDK. The returned value is simply
@@ -183,7 +184,7 @@
             console.log("Let's initialize the canvas");
             // interaction with the sdk
             // 1. initialize SDK
-            CanvasSDK.initialize({
+            window.CanvasSDK.initialize({
 
                 'nonce': function(e) {
                     return getNonce(e);
@@ -194,8 +195,7 @@
             })
             // 2. get the components (and their persisted values) associated with this widget
             .then(function() {
-                console.log("Hanshake done - Next step is Get Components Values")
-                //return window.CanvasSDK.getComponents();
+               // return window.CanvasSDK.getComponents();
             })
             // 3. use the response from the previous call to get the components in order to populate the UI
             .then(function(response){
