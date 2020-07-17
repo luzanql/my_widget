@@ -55,16 +55,18 @@
         </style>
     </head>
     <body>
-        <label id='app-widget-label'>Website</label><br>
+        <label id='app-widget-label'>URL Manager</label><br>
         <select id='app-widget-input'>
-            <option>Select a Value</option>
-            <option value="fr">https://my-awesome-site.fr</option>
-            <option value="co">https://my-awesome-site.co</option>
-            <option value="it">https://my-awesome-site.com</option>
+            <option>Select a value</option>
+            <option value="fr">https://scotch.com/site</option>
+            <option value="co">https://scotch.com/tyc</option>
+            <option value="it">https://scotch.com/faq</option>
         </select>
         <script type="module" src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js">
             import { CanvasSDK} from './CanvasSDK';
-
+            const CanvasSDK = new CanvasSDK();
+        </script>
+        <script>
             /**
              * function which contacts widget's server in order to decrypt
              * a string provided by the SDK. The returned value is simply
