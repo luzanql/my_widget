@@ -14,7 +14,7 @@ def index(request):
 def nonce(request):
     # Shared Key between servers!
     key = b'A3ildelkRxNqzmjzA3ildelkRxNqzmjz'
-    id = request.POST.get('id')
+    id = request.POST.get('n')
     encrypted = json.loads(b64decode(id).decode())
 
     # Get the initialization vector we used to encrypt
