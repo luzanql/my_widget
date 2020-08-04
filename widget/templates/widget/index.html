@@ -69,9 +69,9 @@
 
                 // use the component to populate the label, name, and value of the 
                 // corresponding HTML element
-                $('#app-widget-label').text(component.component_label);
-                $('#app-widget-input').val(component.action_text);
-                $('#app-widget-input').attr('name', component.component_name);
+                $('#app-widget-label').text(component.label);
+                $('#app-widget-input').val(component.value);
+                $('#app-widget-input').attr('name', component.name);
 
                 // return component name for use in our modal
                 return component.name;
