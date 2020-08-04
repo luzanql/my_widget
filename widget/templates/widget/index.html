@@ -59,7 +59,7 @@
              *    The component_name
              */
             function setValue(components) {
-
+                console.log("setting component values", components);
                 // grab the iterator and use it to retrieve the first component 
                 // (in this case, we're just expecting one component)
                 let iterator = components.values();
@@ -156,7 +156,7 @@
             .then(function(response){
 
                 // Internally set value (and get component name for use in our modal)
-               // let componentName = setValue(response.components);
+                let componentName = setValue(response.components);
 
             });
 
