@@ -12,13 +12,15 @@
         <script src="https://aquiceno.dev.sproutloud.com/includes/CanvasSDK.js"></script>
 	</head>
 	<body data-gr-c-s-loaded="true" class="m-external-widget">
-        <label id="app-widget-label">Url Manager</label><br>
-        <select id="app-widget-input" class="m-select">
-            <option>Select a url</option>
-            <option value="fr">https://scotch.com/site</option>
-            <option value="co">https://scotch.com/tyc</option>
-            <option value="it">https://scotch.com/faq</option>
-        </select>
+        <div>
+            <label id="app-widget-label">Url Manager</label><br>
+            <select id="app-widget-input" class="m-select">
+                <option>Select a url</option>
+                <option value="fr">https://scotch.com/site</option>
+                <option value="co">https://scotch.com/tyc</option>
+                <option value="it">https://scotch.com/faq</option>
+            </select>
+        </div>
 
         <script>
 
@@ -164,6 +166,12 @@
 
         </script>
         {% load static %}
+        <script>
+            $('select').parent('div').addClass("m-sdk-select");
+            $('textarea').parent('div').addClass("m-sdk-textarea");
+            $('input[type="text"]').parent('div').addClass("m-sdk-input");
+            $('input[type="checkbox"]').parent('div').addClass("m-sdk-checkbox");
+        </script>
         <script type="text/javascript" src="{% static 'js/iframeResizer.contentWindow.min.js' %}"></script>
     </body>
 </html>
