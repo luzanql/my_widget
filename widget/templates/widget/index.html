@@ -62,21 +62,14 @@
              */
             function setValue(components) {
                 console.log("setting component values", components);
-                // grab the iterator and use it to retrieve the first component 
+                // grab the iterator and use it to retrieve the first component
                 // (in this case, we're just expecting one component)
-                let iterator = components.values();
-                let component = iterator.next().value;
-                console.log("iterator", iterator);
-                console.log("component", component);
-
-                // use the component to populate the label, name, and value of the 
-                // corresponding HTML element
-                $('#app-widget-label').text(component.label);
-                $('#app-widget-input').val(component.value);
-                $('#app-widget-input').attr('name', component.name);
-
-                // return component name for use in our modal
-                return component.name;
+                //let iterator = components.values();
+                //let cmp = [{"component_id":"TC20070000011110","component_name":"linetext7_CUS","component_label":"Tons per Hour","component_type":"text","is_required":true,"action_text":null}]
+                components.forEach(cmp => {
+                    $('#app-widget-label').text(cmp.component_label);
+                    $('#app-widget-input').attr('name', cmp.component_name);
+                })
             }
 
             /**
