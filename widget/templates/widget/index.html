@@ -17,9 +17,10 @@
             <select id="app-widget-input" class="m-select">
                 <option>Select a url</option>
                 <option value="fr">https://scotch.com/site</option>
-                <option value="co">https://scotch.com/tyc</option>
+                <option value="test">https://scotch.com/tyc</option>
                 <option value="it">https://scotch.com/faq</option>
             </select>
+            <p id="componentes"></p>
         </div>
 
         <script>
@@ -69,6 +70,7 @@
                 components.forEach(cmp => {
                     $('#app-widget-label').text(cmp.component_label);
                     $('#app-widget-input').attr('name', cmp.component_name);
+                    $("#componentes").append(cmp + "<br>");
                 })
             }
 
