@@ -69,8 +69,8 @@
                 //let cmp = [{"component_id":"TC20070000011110","component_name":"linetext7_CUS","component_label":"Tons per Hour","component_type":"text","is_required":true,"action_text":null}]
                 components.forEach(cmp => {
                     $('#app-widget-label').text(cmp.component_label);
-                    $('#app-widget-input').attr('name', cmp.component_name);
-                    $('#app-widget-input').val(cmp.action_text);
+                   // $('#app-widget-input').attr('name', cmp.component_name);
+                    //$('#app-widget-input').val(cmp.action_text);
                     $('#componentes').html(JSON.stringify(cmp));
                 })
             }
